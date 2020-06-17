@@ -11,5 +11,14 @@
 
     <artifactId>common-base</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.bdqn</groupId>
+            <artifactId>common-utilt</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
+
+    </dependencies>
 
 </project>
