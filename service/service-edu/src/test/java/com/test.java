@@ -1,5 +1,6 @@
 package com;
 
+import com.alibaba.excel.EasyExcel;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -9,9 +10,16 @@ import com.baomidou.mybatisplus.generator.config.PackageConfig;
 import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import com.listener.ExcelListener;
 import org.junit.Test;
+import sun.rmi.runtime.Log;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class test {
+
+
 
 
     @Test
@@ -19,7 +27,6 @@ public class test {
 
         // 1、创建代码生成器
         AutoGenerator mpg = new AutoGenerator();
-
         // 2、全局配置
         GlobalConfig gc = new GlobalConfig();
         String projectPath = System.getProperty("user.dir");
@@ -55,7 +62,7 @@ public class test {
 
         // 5、策略配置
         StrategyConfig strategy = new StrategyConfig();
-        strategy.setInclude("edu_teacher");
+        strategy.setInclude("edu_subject");
         strategy.setNaming(NamingStrategy.underline_to_camel);//数据库表映射到实体的命名策略
         strategy.setTablePrefix(pc.getModuleName() + "_"); //生成实体时去掉表前缀
 
@@ -70,5 +77,40 @@ public class test {
 
         // 6、执行
         mpg.execute();
+    }
+
+    @Test
+    public void write(){
+
+
+        String fileName = "D:/test.xlsx";
+        List<testEntity> list = list();
+        EasyExcel.write(fileName,testEntity.class).sheet("学生信息").doWrite(list);
+
+
+    }
+
+
+    public static List<testEntity> list(){
+        List<testEntity> list = new ArrayList<testEntity>();
+        for (int i=1;i<10;i++){
+            testEntity testEntity = new testEntity();
+            testEntity.setSon(String.valueOf(i)+"id");
+            testEntity.setName("name"+String.valueOf(i));
+            System.out.println(testEntity.getSon());
+            list.add(testEntity);
+        }
+        System.out.println(list.size());
+    return list;
+    }
+
+    @Test
+    public void read(){
+
+
+        String fileName = "D:/test.xlsx";
+        EasyExcel.read(fileName,testEntity.class,new ExcelListener()).sheet().doRead();
+
+        System.out.println(ExcelListener.list.get(0).getName());
     }
 }

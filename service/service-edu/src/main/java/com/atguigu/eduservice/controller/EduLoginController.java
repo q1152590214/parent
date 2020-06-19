@@ -2,11 +2,13 @@ package com.atguigu.eduservice.controller;
 
 import com.atguigu.Result.Result;
 import com.baomidou.mybatisplus.extension.api.R;
+import io.swagger.annotations.Api;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/eduservice/user/")
 @CrossOrigin
+@Api(description ="登录模块" )
 public class EduLoginController {
 
     @PostMapping("login")

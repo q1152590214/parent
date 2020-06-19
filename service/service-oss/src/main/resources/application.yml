@@ -1,0 +1,16 @@
+server:
+  port: 8002
+spring:
+  application:
+    name: service-oss
+
+#阿里云的oss配置
+aliyun:
+  oss:
+    file:
+      #后面都不能有空格
+      #域名
+      endpoint: https://oss-cn-beijing.aliyuncs.com
+      keyid: LTAI4G7TCBoWWLUTfwKxKt4E
+      keysecret: APZrJCUi4uHmi2jIFyqjFcpc44eTFb
+      bucketname: edu-parent-5227

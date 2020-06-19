@@ -8,6 +8,7 @@ import java.util.Date;
 
 @Component
 public class MyMateObjdecHandler implements MetaObjectHandler {
+
     @Override
     public void insertFill(MetaObject metaObject) {
         //这里的填属性名称

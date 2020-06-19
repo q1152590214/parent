@@ -97,6 +97,7 @@ public class EduTeacherController {
 
         Page<EduTeacher> eduTeacherPage = new Page<>(current, limit);
         QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("gmt_create");
         eduTeacherService.pageQuery(eduTeacherPage,teacherQuery);
         long total = eduTeacherPage.getTotal();
         List<EduTeacher> records = eduTeacherPage.getRecords();;
