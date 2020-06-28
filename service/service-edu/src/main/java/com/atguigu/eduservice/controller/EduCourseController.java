@@ -3,6 +3,7 @@ package com.atguigu.eduservice.controller;
 
 import com.atguigu.Result.Result;
 import com.atguigu.eduservice.entity.vo.ConresInfoVo;
+import com.atguigu.eduservice.entity.vo.CouresPublishVo;
 import com.atguigu.eduservice.service.EduCourseCollectService;
 import com.atguigu.eduservice.service.EduCourseService;
 import io.swagger.annotations.Api;
@@ -51,6 +52,14 @@ public class EduCourseController {
         eduCourseService.updataCourseInfo(conresInfoVo);
         return Result.OK();
 
+    }
+
+
+    @ApiOperation(value = "根据课程ID查询课程确认信息")
+    @GetMapping("getPublishCourseInfo/{courseId}")
+    public Result getPublishCourseInfo(@PathVariable("courseId") String courseId){
+        CouresPublishVo couresPublishVo= eduCourseService.getPublishCourseInfo(courseId);
+        return  Result.OK().data("publishCourse",couresPublishVo);
     }
 }
 

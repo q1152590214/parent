@@ -4,6 +4,7 @@ import com.atguigu.Result.Result;
 import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.EduCourseDescription;
 import com.atguigu.eduservice.entity.vo.ConresInfoVo;
+import com.atguigu.eduservice.entity.vo.CouresPublishVo;
 import com.atguigu.eduservice.mapper.EduCourseMapper;
 import com.atguigu.eduservice.service.EduCourseDescriptionService;
 import com.atguigu.eduservice.service.EduCourseService;
@@ -87,5 +88,11 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         eduCourseDescriptionService.updateById(eduCourseDescription);
 
 
+    }
+
+    @Override
+    public CouresPublishVo getPublishCourseInfo(String courseId) {
+        CouresPublishVo publishCouresInfo = baseMapper.getPublishCouresInfo(courseId);
+        return publishCouresInfo;
     }
 }
