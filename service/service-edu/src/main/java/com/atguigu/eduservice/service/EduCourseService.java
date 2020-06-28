@@ -1,6 +1,8 @@
 package com.atguigu.eduservice.service;
 
 import com.atguigu.eduservice.entity.EduCourse;
+import com.atguigu.eduservice.entity.vo.ConresInfoVo;
+import com.atguigu.exception.MyExcaption;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -13,4 +15,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
  */
 public interface EduCourseService extends IService<EduCourse> {
 
+    String saveConrseInfo(ConresInfoVo conresInfoVo) throws MyExcaption;
+
+    ConresInfoVo getCourseInfo(String courseId);
+
+    void updataCourseInfo(ConresInfoVo conresInfoVo);
 }

@@ -2,6 +2,7 @@ package com.atguigu.eduservice.listener;
 
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
+import com.atguigu.Result.Result;
 import com.atguigu.eduservice.entity.EduSubject;
 import com.atguigu.eduservice.entity.excel.ExcelData;
 import com.atguigu.eduservice.service.EduSubjectService;
@@ -47,8 +48,7 @@ public class SubjectListener extends AnalysisEventListener<ExcelData> {
     public void invoke(ExcelData excelData, AnalysisContext analysisContext) {
 
         if(excelData==null){
-            log.error("文件为空");
-            return;
+          throw  MyExcaption.from(Result.ERROR().massage("文件了内容为空"));
         }
         //判断是否纯在一级分类，如果没有就进行保存
         EduSubject eduSubjectOne = this.existOneEduSubject(eduSubjectService, excelData.getOneSubjectName());

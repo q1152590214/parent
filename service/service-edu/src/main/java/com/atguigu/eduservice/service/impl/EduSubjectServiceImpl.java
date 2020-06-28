@@ -30,6 +30,11 @@ package com.atguigu.eduservice.service.impl;
 @Service
 public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubject> implements EduSubjectService {
 
+    /**
+     * excel分类文件上传，读取并添加到数据中
+     * @param file
+     * @param eduSubjectService
+     */
     @Override
     public void saveSubject(MultipartFile file,EduSubjectService eduSubjectService) {
         try {
@@ -41,6 +46,11 @@ public class EduSubjectServiceImpl extends ServiceImpl<EduSubjectMapper, EduSubj
 
     }
 
+
+    /**
+     * 分类的二级联动查询
+     * @return
+     */
     @Override
     public List<OneSubject> getAllOneSubject() {
 

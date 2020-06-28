@@ -22,6 +22,11 @@ import org.springframework.util.StringUtils;
 public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeacher> implements EduTeacherService {
 
 
+    /**
+     * 分页条件查询
+     * @param pageParam
+     * @param teacherQuery
+     */
     @Override
     public void pageQuery(Page<EduTeacher> pageParam, TeacherQuery teacherQuery) {
 

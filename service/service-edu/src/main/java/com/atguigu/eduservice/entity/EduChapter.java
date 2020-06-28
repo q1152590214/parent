@@ -2,8 +2,6 @@ package com.atguigu.eduservice.entity;
 
 import com.baomidou.mybatisplus.annotation.FieldFill;
 import com.baomidou.mybatisplus.annotation.IdType;
-
-import java.io.File;
 import java.util.Date;
 
 import com.baomidou.mybatisplus.annotation.TableField;
@@ -17,29 +15,35 @@ import lombok.experimental.Accessors;
 
 /**
  * <p>
- * 课程简介
+ * 课程
  * </p>
  *
  * @author testjava
- * @since 2020-06-22
+ * @since 2020-06-23
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
-@ApiModel(value="EduCourseDescription对象", description="课程简介")
-public class EduCourseDescription implements Serializable {
+@ApiModel(value="EduChapter对象", description="课程")
+public class EduChapter implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    @ApiModelProperty(value = "课程ID")
-    @TableId(value = "id", type = IdType.INPUT)
+    @ApiModelProperty(value = "章节ID")
+    @TableId(value = "id", type = IdType.ID_WORKER_STR)
     private String id;
 
-    @ApiModelProperty(value = "课程简介")
-    private String description;
+    @ApiModelProperty(value = "课程ID")
+    private String courseId;
 
-    @ApiModelProperty(value = "创建时间")
+    @ApiModelProperty(value = "章节名称")
+    private String title;
+
+    @ApiModelProperty(value = "显示排序")
+    private Integer sort;
+
     @TableField(fill = FieldFill.INSERT)
+    @ApiModelProperty(value = "创建时间")
     private Date gmtCreate;
 
     @TableField(fill = FieldFill.INSERT_UPDATE)

@@ -24,7 +24,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/eduservice/edu-subject")
 @CrossOrigin
-@Api(description = "课程模块")
+@Api(description = "分类模块")
 public class EduSubjectController {
 
 
@@ -44,9 +44,7 @@ public class EduSubjectController {
     @GetMapping("/getAllSubject")
     @ApiOperation(value = "查询一级分类和下面的二级分类")
     public Result  GetAllSubject(){
-
         List<OneSubject> list = eduSubjectService.getAllOneSubject();
-
         return Result.OK().data("list",list);
     }
 }
