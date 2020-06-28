@@ -9,6 +9,7 @@ import com.atguigu.eduservice.mapper.EduChapterMapper;
 import com.atguigu.eduservice.service.EduChapterService;
 import com.atguigu.eduservice.service.EduCourseService;
 import com.atguigu.eduservice.service.EduVideoService;
+import com.atguigu.exception.MyExcaption;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
@@ -51,7 +52,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         QueryWrapper<EduVideo> eduVideoQueryWrapper = new QueryWrapper<>();
         eduVideoQueryWrapper.eq("course_id",courseId);
         List<EduVideo> eduVideoList = eduVideoService.list(eduVideoQueryWrapper);
-         List<ChapterVo> list = new ArrayList<>();
+        List<ChapterVo> list = new ArrayList<>();
 
         //循环章节
         for (int i=0;i<eduChapterList.size();i++){
@@ -78,7 +79,23 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
 
         }
 
-
         return list;
+    }
+
+
+    /**
+     * 删除章节,判断下面是否还有小节，如果没就删除，有就不删
+     */
+    @Override
+    public boolean deleteChapter(String chapterId) {
+        QueryWrapper<EduVideo> eduVideoQueryWrapper = new QueryWrapper<>();
+        eduVideoQueryWrapper.eq("chapter_id",chapterId);
+        int count = eduVideoService.count(eduVideoQueryWrapper);
+        if(count>0){
+            throw new MyExcaption(20001,"章节内还有小节，不能删除");
+        }else {
+            int result = baseMapper.deleteById(chapterId);
+            return result>0;
+        }
     }
 }
