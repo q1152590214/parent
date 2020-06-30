@@ -3,16 +3,21 @@ package com.atguigu.eduservice.service.impl;
 import com.atguigu.Result.Result;
 import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.EduCourseDescription;
+import com.atguigu.eduservice.entity.EduTeacher;
 import com.atguigu.eduservice.entity.vo.ConresInfoVo;
 import com.atguigu.eduservice.entity.vo.CouresPublishVo;
 import com.atguigu.eduservice.mapper.EduCourseMapper;
+import com.atguigu.eduservice.service.EduChapterService;
 import com.atguigu.eduservice.service.EduCourseDescriptionService;
 import com.atguigu.eduservice.service.EduCourseService;
+import com.atguigu.eduservice.service.EduVideoService;
 import com.atguigu.exception.MyExcaption;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 
@@ -30,6 +35,11 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     @Resource
     private EduCourseDescriptionService eduCourseDescriptionService;
 
+    @Resource
+    private EduVideoService eduVideoService;
+
+    @Resource
+    private EduChapterService eduChapterService;
 
     /**
      * 添加课程基本信息
@@ -95,4 +105,35 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
         CouresPublishVo publishCouresInfo = baseMapper.getPublishCouresInfo(courseId);
         return publishCouresInfo;
     }
+
+    @Override
+    public void pageQuery(Page<EduCourse> eduCoursePage, String courseName, String type) {
+        QueryWrapper<EduCourse> wrapper = new QueryWrapper<>();
+        if(!StringUtils.isEmpty(courseName)){
+            wrapper.like("title",courseName);
+        }
+        if(!StringUtils.isEmpty(type)){
+            wrapper.eq("status",type);
+        }
+        baseMapper.selectPage(eduCoursePage,wrapper);
+    }
+
+    /**
+     * 删除课程，先删描述、小节、章节,
+     */
+    @Override
+    public void deleteCourse(String courseId) {
+
+        eduVideoService.deleteByCourseId(courseId);
+
+        eduChapterService.deleteByCourseId(courseId);
+
+        eduCourseDescriptionService.deleteById(courseId);
+
+        int i = baseMapper.deleteById(courseId);
+        if(i==0){
+            throw new MyExcaption(20001,"删除失败");
+        }
+    }
+
 }
