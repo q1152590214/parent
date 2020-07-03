@@ -1,5 +1,4 @@
-package com.atguigu.eduservice;
-
+package com.atguigu.cmsservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -8,12 +7,12 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.atguigu")
 @EnableDiscoveryClient
 @EnableFeignClients
-public class EduServiceMain {
+@ComponentScan({"com.atguigu"})
+public class CmsServiceMain {
 
     public static void main(String[] args) {
-        SpringApplication.run(EduServiceMain.class,args);
+        SpringApplication.run(CmsServiceMain.class,args);
     }
 }

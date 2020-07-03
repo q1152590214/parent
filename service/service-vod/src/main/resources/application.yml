@@ -7,8 +7,18 @@ spring:
     multipart:
       max-file-size: 1024MB
       max-request-size: 1024MB
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
 aliyun:
   vod:
     file:
-      keyid: LTAI4G7TCBoWWLUTfwKxKt4E
-      keysecrer: APZrJCUi4uHmi2jIFyqjFcpc44eTFb
+      keyid: LTAI4GHFyfFH3jnFzJskGBcF
+      keysecrer: QyfN5dwBUtnzVOL26ANJE537TnMflJ
+
+
+
+#ribbon:
+#  ReadTimeout: 60000
+#  ConnectTimeout: 60000

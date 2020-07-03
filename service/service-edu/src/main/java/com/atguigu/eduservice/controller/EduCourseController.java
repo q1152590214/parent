@@ -97,11 +97,11 @@ public class EduCourseController {
     }
 
 
+
+    @ApiOperation(value = "根据课程ID删除课程")
     @DeleteMapping("/{courseId}")
     public Result deleteCourse(@PathVariable String courseId){
-
         eduCourseService.deleteCourse(courseId);
-
         return Result.OK();
     }
 }

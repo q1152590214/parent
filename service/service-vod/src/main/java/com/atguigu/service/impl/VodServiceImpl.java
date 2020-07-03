@@ -6,15 +6,21 @@ import com.aliyun.vod.upload.req.UploadVideoRequest;
 import com.aliyun.vod.upload.resp.UploadStreamResponse;
 import com.aliyun.vod.upload.resp.UploadVideoResponse;
 import com.aliyuncs.DefaultAcsClient;
+import com.aliyuncs.exceptions.ClientException;
+import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
+import com.atguigu.Result.Result;
 import com.atguigu.Utils.ConstanVodUtils;
+import com.atguigu.Utils.InitObject;
 import com.atguigu.exception.MyExcaption;
 import com.atguigu.service.VodService;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -55,4 +61,20 @@ public class VodServiceImpl implements VodService {
 
         return videoId;
     }
+
+    @Override
+    public void deleteRemoveAlyVod(List videolist) {
+        try {
+            int i = 10/0;
+         String id = StringUtils.join(videolist.toArray(),",");
+            DefaultAcsClient client = InitObject.initVodClient(ConstanVodUtils.ACCESS_KEY_ID, ConstanVodUtils.ACCESS_KEY_SECRET);
+            DeleteVideoRequest request = new DeleteVideoRequest();
+            request.setVideoIds(id);
+            client.getAcsResponse(request);
+        }catch (ClientException e) {
+            throw  new MyExcaption(20001,e.getMessage());
+        }
+    }
+
+
 }

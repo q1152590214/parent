@@ -124,6 +124,7 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
     @Override
     public void deleteCourse(String courseId) {
 
+        //删除视频
         eduVideoService.deleteByCourseId(courseId);
 
         eduChapterService.deleteByCourseId(courseId);

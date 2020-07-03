@@ -5,18 +5,17 @@ import com.aliyun.vod.upload.req.UploadVideoRequest;
 import com.aliyun.vod.upload.resp.UploadVideoResponse;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.exceptions.ClientException;
-import com.aliyuncs.vod.model.v20170321.GetPlayInfoRequest;
-import com.aliyuncs.vod.model.v20170321.GetPlayInfoResponse;
-import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
-import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
+import com.aliyuncs.vod.model.v20170321.*;
 import org.junit.Test;
 
 import java.util.List;
 
+import static com.atguigu.test.test.initVodClient;
+
 public class testVod {
 
     public static void main(String[] args) throws ClientException {
-        DefaultAcsClient client = test.initVodClient("LTAI4G7TCBoWWLUTfwKxKt4E","APZrJCUi4uHmi2jIFyqjFcpc44eTFb");
+        DefaultAcsClient client = initVodClient("LTAI4G7TCBoWWLUTfwKxKt4E","APZrJCUi4uHmi2jIFyqjFcpc44eTFb");
         GetPlayInfoResponse response = new GetPlayInfoResponse();
         GetVideoPlayAuthResponse getVideoPlayAuthResponse = new GetVideoPlayAuthResponse();
         try {
@@ -39,7 +38,7 @@ public class testVod {
 
     @Test
     public void Test() throws Exception {
-        DefaultAcsClient client = test.initVodClient("LTAI4G7TCBoWWLUTfwKxKt4E","APZrJCUi4uHmi2jIFyqjFcpc44eTFb");
+        DefaultAcsClient client = initVodClient("LTAI4G7TCBoWWLUTfwKxKt4E","APZrJCUi4uHmi2jIFyqjFcpc44eTFb");
         GetVideoPlayAuthResponse videoPlayAuth = getVideoPlayAuth(client);
         System.out.println("凭证："+videoPlayAuth.getPlayAuth()+"\n");
         System.out.println("名称："+videoPlayAuth.getVideoMeta().getTitle());
@@ -64,7 +63,7 @@ public class testVod {
 
 
     @Test
-    public void  test(){
+    public void  test1(){
         String accessKeyId = "LTAI4G7TCBoWWLUTfwKxKt4E";
         String accessKeySecret = "APZrJCUi4uHmi2jIFyqjFcpc44eTFb";
         String title = "测试";
@@ -91,6 +90,27 @@ public class testVod {
             System.out.print("ErrorCode=" + response.getCode() + "\n");
             System.out.print("ErrorMessage=" + response.getMessage() + "\n");
         }
+    }
+
+    public static DeleteVideoResponse deleteVideo(DefaultAcsClient client) throws Exception {
+        DeleteVideoRequest request = new DeleteVideoRequest();
+        //支持传入多个视频ID，多个用逗号分隔
+        request.setVideoIds("1118a74715f24fa6ab6207b5f27e6e2a");
+        return client.getAcsResponse(request);
+    }
+    /*请求示例*/
+    @Test
+    public  void test() throws ClientException {
+        DefaultAcsClient client = initVodClient("LTAI4G7TCBoWWLUTfwKxKt4E", "APZrJCUi4uHmi2jIFyqjFcpc44eTFb");
+        try {
+
+            DeleteVideoResponse response = new DeleteVideoResponse();
+            response = deleteVideo(client);
+            System.out.print("RequestId = " + response.getRequestId() + "\n");
+        } catch (Exception e) {
+            System.out.print("ErrorMessage = " + e.getLocalizedMessage());
+        }
+
     }
 
 
