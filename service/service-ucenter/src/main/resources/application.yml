@@ -1,0 +1,31 @@
+server:
+  port: 8006
+spring:
+  application:
+    name: service-center
+  datasource:
+    url: jdbc:mysql://localhost:3306/guli?serverTimezone=GMT%2B8
+    password: 123456
+    username: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  redis:
+    port: 6379
+    host: localhost
+    timeout: 1800000
+    lettuce:
+      pool:
+        max-idle: 5
+        min-idle: 0
+        max-wait: -1
+        max-active: 20
+mybatis-plus:
+  mapper-locations: classpath:com.atguigu.educenter.*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
