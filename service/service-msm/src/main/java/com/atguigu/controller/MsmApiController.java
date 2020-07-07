@@ -3,6 +3,7 @@ package com.atguigu.controller;
 import com.atguigu.Result.Result;
 import com.atguigu.service.MsmService;
 import com.atguigu.utils.RandomUtil;
+import com.fasterxml.jackson.datatype.jsr310.ser.YearSerializer;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -39,16 +40,17 @@ public class MsmApiController {
 
         // 生成随机数，传递至阿里云进行发送
         code = RandomUtil.getFourBitRandom();
+        System.out.println(code);
         HashMap<String,Object> stringObjectHashMap = new HashMap<>();
         stringObjectHashMap.put("code",code);
-      boolean isSend =  msmService.send(stringObjectHashMap,phone);
-      if(isSend){
-          //向redis中放 k-v 并设置过期时间
-          redisTemplate.opsForValue().set(phone,code,5, TimeUnit.MINUTES);
-          return Result.OK();
-      }else {
-          return  Result.ERROR();
-      }
+        boolean isSend =  msmService.send(stringObjectHashMap,phone);
+        if(true){
+            //向redis中放 k-v 并设置过期时间
+            redisTemplate.opsForValue().set(phone,code,5, TimeUnit.MINUTES);
+            return Result.OK();
+        }else {
+            return  Result.ERROR();
+        }
 
     }
 }

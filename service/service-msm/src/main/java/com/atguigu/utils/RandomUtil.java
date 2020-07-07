@@ -11,7 +11,7 @@ public class RandomUtil {
     private  static  final Random RANDOM = new Random();
     private static  final DecimalFormat FOURD_FORMAT = new DecimalFormat("0000");
     private  static  final  DecimalFormat SIX_FORMAT = new DecimalFormat("000000");
-    public static    String getFourBitRandom(){
+    public static String getFourBitRandom(){
         return FOURD_FORMAT.format( RANDOM.nextInt(10000));
     }
 

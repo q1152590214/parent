@@ -1,3 +1,4 @@
+import com.alibaba.nacos.common.util.Md5Utils;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -8,6 +9,7 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import org.junit.Test;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 public class test {
 
@@ -67,5 +69,15 @@ public class test {
 
         // 6、执行
         mpg.execute();
+    }
+
+
+    @Test
+    public void test1(){
+//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//        String encode = bCryptPasswordEncoder.encode("111111");
+//        System.out.println(encode);
+        String md5 = Md5Utils.getMD5("111111", "utf-8");
+        System.out.println(md5);
     }
 }
