@@ -1,4 +1,5 @@
 import com.alibaba.nacos.common.util.Md5Utils;
+import com.atguigu.educenter.entity.vo.RegisterVo;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.generator.AutoGenerator;
@@ -9,7 +10,10 @@ import com.baomidou.mybatisplus.generator.config.StrategyConfig;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import org.junit.Test;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.concurrent.TimeUnit;
 
 public class test {
 
@@ -79,5 +83,14 @@ public class test {
 //        System.out.println(encode);
         String md5 = Md5Utils.getMD5("111111", "utf-8");
         System.out.println(md5);
+    }
+
+
+    @Test
+    public void  test3(){
+
+
+
+
     }
 }

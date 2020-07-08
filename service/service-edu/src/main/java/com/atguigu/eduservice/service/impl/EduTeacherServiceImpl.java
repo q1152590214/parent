@@ -10,6 +10,10 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 /**
  * <p>
  * 讲师 服务实现类
@@ -57,4 +61,41 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
 
 
     }
+
+    /**
+     * 前端分页显示讲师列表
+     * @param eduTeacherPage
+     * @return
+     */
+    @Override
+    public Map<String, Object> getTeacherFrontList(Page<EduTeacher> eduTeacherPage) {
+        QueryWrapper<EduTeacher> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("id");
+        baseMapper.selectPage(eduTeacherPage,wrapper);
+        List<EduTeacher> records = eduTeacherPage.getRecords();
+        //单前页数
+        long current = eduTeacherPage.getCurrent();
+        //总页数
+        long pages = eduTeacherPage.getPages();
+        //总记录数
+        long total = eduTeacherPage.getTotal();
+        //单前页有多少条记录
+        long size = eduTeacherPage.getSize();
+        //是否有下一页
+        boolean hasNext = eduTeacherPage.hasNext();
+        //是否有上一页
+        boolean hasPrevious = eduTeacherPage.hasPrevious();
+
+        Map<String, Object> hashMap = new HashMap<>();
+        hashMap.put("current",current);
+        hashMap.put("records",records);
+        hashMap.put("pages",pages);
+        hashMap.put("total",total);
+        hashMap.put("size",size);
+        hashMap.put("hasNext",hasNext);
+        hashMap.put("hasPrevious",hasPrevious);
+        return hashMap;
+    }
+
+
 }
