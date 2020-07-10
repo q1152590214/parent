@@ -3,7 +3,8 @@ package com.atguigu.eduservice.service.impl;
 import com.atguigu.Result.Result;
 import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.EduCourseDescription;
-import com.atguigu.eduservice.entity.EduTeacher;
+import com.atguigu.eduservice.entity.frontvo.CourseFrontVo;
+import com.atguigu.eduservice.entity.frontvo.CourseWebVo;
 import com.atguigu.eduservice.entity.vo.ConresInfoVo;
 import com.atguigu.eduservice.entity.vo.CouresPublishVo;
 import com.atguigu.eduservice.mapper.EduCourseMapper;
@@ -20,6 +21,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * <p>
@@ -30,13 +34,14 @@ import javax.annotation.Resource;
  * @since 2020-06-22
  */
 @Service
-public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse> implements EduCourseService {
+public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse> implements EduCourseService  {
 
     @Resource
     private EduCourseDescriptionService eduCourseDescriptionService;
 
     @Resource
     private EduVideoService eduVideoService;
+
 
     @Resource
     private EduChapterService eduChapterService;
@@ -136,5 +141,63 @@ public class EduCourseServiceImpl extends ServiceImpl<EduCourseMapper, EduCourse
             throw new MyExcaption(20001,"删除失败");
         }
     }
+
+    @Override
+    public  Map<String,Object>  getFrontCourseList(Page<EduCourse> eduCoursePage, CourseFrontVo couresPublishVo) {
+
+        QueryWrapper<EduCourse> eduCourseQueryWrapper  = new QueryWrapper<>();
+        if(!StringUtils.isEmpty(couresPublishVo.getSubjectParentId())){
+            eduCourseQueryWrapper.eq("subject_parent_id",couresPublishVo.getSubjectParentId());
+        }
+
+        if(!StringUtils.isEmpty(couresPublishVo.getSubjectId())){
+            eduCourseQueryWrapper.eq("subject_id",couresPublishVo.getSubjectId());
+        }
+
+        if(!StringUtils.isEmpty(couresPublishVo.getPriceSort())){
+            eduCourseQueryWrapper.orderByDesc("price");
+        }
+
+        if(!StringUtils.isEmpty(couresPublishVo.getBuyCountSort())){
+            eduCourseQueryWrapper.orderByDesc("buy_count");
+        }
+
+        if(!StringUtils.isEmpty(couresPublishVo.getGmtCreateSort())){
+            eduCourseQueryWrapper.orderByDesc("gmt_create");
+        }
+
+        baseMapper.selectPage(eduCoursePage,eduCourseQueryWrapper);
+        //单前页数
+        long current = eduCoursePage.getCurrent();
+        //总页数
+        long pages = eduCoursePage.getPages();
+        //总记录数
+        long total = eduCoursePage.getTotal();
+        //单前页有多少条记录
+        long size = eduCoursePage.getSize();
+        //是否有下一页
+        boolean hasNext = eduCoursePage.hasNext();
+        //是否有上一页
+        boolean hasPrevious = eduCoursePage.hasPrevious();
+        List<EduCourse> records = eduCoursePage.getRecords();
+
+        Map<String, Object> hashMap = new HashMap<>();
+        hashMap.put("current",current);
+        hashMap.put("items",records);
+        hashMap.put("pages",pages);
+        hashMap.put("total",total);
+        hashMap.put("size",size);
+        hashMap.put("hasNext",hasNext);
+        hashMap.put("hasPrevious",hasPrevious);
+
+
+        return hashMap;
+    }
+
+    @Override
+    public CourseWebVo getBaseCourseInfo(String courseId) {
+        return baseMapper.getBaseCourseInfo(courseId);
+    }
+
 
 }

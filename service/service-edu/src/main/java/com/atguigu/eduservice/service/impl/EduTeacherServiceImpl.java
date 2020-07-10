@@ -88,7 +88,7 @@ public class EduTeacherServiceImpl extends ServiceImpl<EduTeacherMapper, EduTeac
 
         Map<String, Object> hashMap = new HashMap<>();
         hashMap.put("current",current);
-        hashMap.put("records",records);
+        hashMap.put("items",records);
         hashMap.put("pages",pages);
         hashMap.put("total",total);
         hashMap.put("size",size);

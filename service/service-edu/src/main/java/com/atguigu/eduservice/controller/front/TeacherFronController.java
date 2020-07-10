@@ -44,7 +44,6 @@ public class TeacherFronController {
         QueryWrapper<EduCourse> eduCourseQueryWrapper = new QueryWrapper<>();
         eduCourseQueryWrapper.eq("teacher_id",TeacherById.getId());
         List<EduCourse> list = eduCourseService.list(eduCourseQueryWrapper);
-
         return Result.OK().data("teacher",TeacherById).data("courseList",list);
     }
 

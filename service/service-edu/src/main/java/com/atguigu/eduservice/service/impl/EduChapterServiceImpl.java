@@ -5,6 +5,7 @@ import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.EduVideo;
 import com.atguigu.eduservice.entity.chaptervo.ChapterVo;
 import com.atguigu.eduservice.entity.chaptervo.VideoVo;
+import com.atguigu.eduservice.entity.frontvo.CourseFrontVo;
 import com.atguigu.eduservice.mapper.EduChapterMapper;
 import com.atguigu.eduservice.service.EduChapterService;
 import com.atguigu.eduservice.service.EduCourseService;
@@ -36,7 +37,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
 
 
     /**
-     * 根据ID查询章节，包含下面小节
+     * 根据课程ID查询章节，包含下面小节
      * @param courseId
      * @return
      */
@@ -105,4 +106,7 @@ public class EduChapterServiceImpl extends ServiceImpl<EduChapterMapper, EduChap
         eduEduChapterWrapper.eq("course_id",courseId);
         baseMapper.delete(eduEduChapterWrapper);
     }
+
+
+
 }
