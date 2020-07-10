@@ -19,3 +19,8 @@ spring:
         max-wait: -1
         max-idle: 5
         min-idle: 0
+aliyun:
+  vod:
+    file:
+      keyid: LTAI4GHFyfFH3jnFzJskGBcF
+      keysecrer: QyfN5dwBUtnzVOL26ANJE537TnMflJ

@@ -10,6 +10,7 @@ import com.aliyuncs.exceptions.ServerException;
 import com.aliyuncs.http.MethodType;
 import com.aliyuncs.profile.DefaultProfile;
 import com.atguigu.service.MsmService;
+import com.atguigu.utils.AliyunUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -22,8 +23,9 @@ public class MsmServiceImpl implements MsmService {
 
         if(StringUtils.isEmpty(phone)){ return false;}
 
+
         DefaultProfile profile =
-                DefaultProfile.getProfile("default", "LTAI4GHFyfFH3jnFzJskGBcF", "QyfN5dwBUtnzVOL26ANJE537TnMflJ");
+                DefaultProfile.getProfile("default", AliyunUtils.ALIYUN_KEY, AliyunUtils.ALIYUN_SECRET);
         IAcsClient client = new DefaultAcsClient(profile);
 
 

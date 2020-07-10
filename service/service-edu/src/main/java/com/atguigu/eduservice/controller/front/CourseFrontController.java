@@ -5,7 +5,6 @@ import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.chaptervo.ChapterVo;
 import com.atguigu.eduservice.entity.frontvo.CourseFrontVo;
 import com.atguigu.eduservice.entity.frontvo.CourseWebVo;
-import com.atguigu.eduservice.entity.vo.CouresPublishVo;
 import com.atguigu.eduservice.service.EduChapterService;
 import com.atguigu.eduservice.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -17,6 +16,9 @@ import javax.annotation.Resource;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * @author Administrator
+ */
 @RestController
 @RequestMapping("/eduservice/coursefront/")
 @Api(description = "前段课程模块")

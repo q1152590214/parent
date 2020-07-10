@@ -36,6 +36,10 @@ public class testVod {
 
     }
 
+    /**
+     * 根据视频ID获取视频播放凭证
+     * @throws Exception
+     */
     @Test
     public void Test() throws Exception {
         DefaultAcsClient client = initVodClient("LTAI4G7TCBoWWLUTfwKxKt4E","APZrJCUi4uHmi2jIFyqjFcpc44eTFb");

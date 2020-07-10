@@ -3,6 +3,8 @@ package com.atguigu.controller;
 import com.aliyuncs.DefaultAcsClient;
 import com.aliyuncs.exceptions.ClientException;
 import com.aliyuncs.vod.model.v20170321.DeleteVideoRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthRequest;
+import com.aliyuncs.vod.model.v20170321.GetVideoPlayAuthResponse;
 import com.atguigu.Result.Result;
 import com.atguigu.Utils.ConstanVodUtils;
 import com.atguigu.Utils.InitObject;
@@ -57,4 +59,22 @@ public class VodController {
         return Result.OK();
     }
 
+    @ApiOperation(value = "获取播放凭证")
+    @GetMapping("getPlayAuth/{id}")
+    public  Result  getPlayAuth(@PathVariable("id")String id){
+        try {
+            DefaultAcsClient client = InitObject.initVodClient(ConstanVodUtils.ACCESS_KEY_ID, ConstanVodUtils.ACCESS_KEY_SECRET);
+
+            GetVideoPlayAuthRequest request = new GetVideoPlayAuthRequest();
+            request.setVideoId(id);
+            GetVideoPlayAuthResponse videoPlayAuth = client.getAcsResponse(request);;
+            //获取播放凭证
+            String playAuth = videoPlayAuth.getPlayAuth();
+            return Result.OK().data("playAuth",playAuth);
+        }catch (Exception e){
+            throw  new MyExcaption(20001,"获取凭证失败");
+        }
+
+
+    }
 }
