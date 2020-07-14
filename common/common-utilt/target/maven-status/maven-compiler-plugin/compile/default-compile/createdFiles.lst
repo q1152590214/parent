@@ -1,3 +1,6 @@
-com\atguigu\Result\Result.class
 com\atguigu\Result\ResultCode.class
 com\atguigu\JwtUtilt.class
+com\atguigu\Vo\UcenterOrderVo.class
+com\atguigu\Result\Result.class
+com\atguigu\Vo\UcenterVo.class
+com\atguigu\Vo\CourseTeacherOrderVo.class

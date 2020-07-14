@@ -97,5 +97,11 @@ public class UcenterMemberController {
         return ucenterOrderVo;
     }
 
+    @GetMapping("countRegister/{day}")
+    public Result countRegister(@PathVariable("day")String day){
+        Integer count = ucenterMemberService.countRegisterDay(day);
+        return Result.OK().data("countRegister",count);
+    }
+
 }
 

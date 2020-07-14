@@ -1,7 +1,9 @@
 package com.atguigu.eduservice.controller.front;
 
+import com.atguigu.JwtUtilt;
 import com.atguigu.Result.Result;
 import com.atguigu.Vo.CourseTeacherOrderVo;
+import com.atguigu.eduservice.client.OrderClient;
 import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.chaptervo.ChapterVo;
 import com.atguigu.eduservice.entity.frontvo.CourseFrontVo;
@@ -15,6 +17,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 import java.util.Map;
 
@@ -27,10 +30,13 @@ import java.util.Map;
 public class CourseFrontController {
 
     @Resource
-    EduCourseService eduCourseService;
-    
+    private EduCourseService eduCourseService;
+
     @Resource
-    EduChapterService eduChapterService;
+    private EduChapterService eduChapterService;
+
+    @Resource
+    private OrderClient orderClient;
 
     @ApiOperation("前台课程信息")
     @PostMapping("getFrontCourseList/{page}/{limit}")
@@ -43,10 +49,11 @@ public class CourseFrontController {
 
     @ApiOperation("前台课程详情")
     @GetMapping("getFrontCourseInfo/{courseId}")
-    public Result  getFrontCourseInfo(@PathVariable("courseId")String courseId){
+    public Result  getFrontCourseInfo(@PathVariable("courseId")String courseId, HttpServletRequest request){
         CourseWebVo courseWebVo =     eduCourseService.getBaseCourseInfo(courseId);
+        boolean buyCourse = orderClient.isBuyCourse(courseId, JwtUtilt.getMemberIdByJwtToken(request));
         List<ChapterVo> chapterVideoByCouresId = eduChapterService.getChapterVideoByCouresId(courseId);
-        return Result.OK().data("courseWebVo",courseWebVo).data("chapterVideoList",chapterVideoByCouresId);
+        return Result.OK().data("courseWebVo",courseWebVo).data("chapterVideoList",chapterVideoByCouresId).data("isBuy",buyCourse);
     }
 
 
