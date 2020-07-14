@@ -1,6 +1,7 @@
 package com.atguigu.eduservice.controller.front;
 
 import com.atguigu.Result.Result;
+import com.atguigu.Vo.CourseTeacherOrderVo;
 import com.atguigu.eduservice.entity.EduCourse;
 import com.atguigu.eduservice.entity.chaptervo.ChapterVo;
 import com.atguigu.eduservice.entity.frontvo.CourseFrontVo;
@@ -10,6 +11,7 @@ import com.atguigu.eduservice.service.EduCourseService;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -47,5 +49,19 @@ public class CourseFrontController {
         return Result.OK().data("courseWebVo",courseWebVo).data("chapterVideoList",chapterVideoByCouresId);
     }
 
+
+    /**
+     * 根据ID查询订单需要的课程信息和讲师信息
+     * @param id
+     * @return
+     */
+    @GetMapping("getCourseInfoOrder/{id}")
+    public CourseTeacherOrderVo  getCourseTeacherInfoOrder(@PathVariable("id") String id){
+        CourseWebVo baseCourseInfo = eduCourseService.getBaseCourseInfo(id);
+        System.out.println(baseCourseInfo);
+        CourseTeacherOrderVo courseTeacherOrderVo = new CourseTeacherOrderVo();
+        BeanUtils.copyProperties(baseCourseInfo,courseTeacherOrderVo);
+        return courseTeacherOrderVo;
+    }
 
 }

@@ -4,16 +4,19 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author Administrator
+ */
 @Component
 public class ConstanWxUtils implements InitializingBean {
 
-    @Value("${wx.open.app_id}")
+    @Value(value = "${wx.open.appid}")
     private  String appId;
 
-    @Value("${wx.open.app_secret}")
+    @Value(value = "${wx.open.appsecret}")
     private  String appSecret;
 
-    @Value("${wx.open.redirect_url}")
+    @Value(value = "${wx.open.redirecturl}")
     private  String redirectUrl;
 
 

@@ -34,3 +34,10 @@ feign:
   hystrix:
     enabled: true
 #  ConnectTimeout: 60000
+
+#
+#wx:
+#  open:
+#    appid: wxed9954c01bb89b47
+#    appsecret: a7482517235173ddb4083788de60b90e
+#    redirecturl: http://guli.shop/api/ucenter/wx/callback

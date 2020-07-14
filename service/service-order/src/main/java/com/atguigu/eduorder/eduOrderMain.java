@@ -1,20 +1,19 @@
-package com.atguigu.eduservice;
+package com.atguigu.eduorder;
 
-
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@ComponentScan(basePackages = "com.atguigu")
+@ComponentScan("com.atguigu")
 @EnableDiscoveryClient
 @EnableFeignClients
-public class EduServiceMain {
+public class eduOrderMain {
 
     public static void main(String[] args) {
-        SpringApplication.run(EduServiceMain.class,args);
+        SpringApplication.run(eduOrderMain.class,args);
     }
 }

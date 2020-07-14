@@ -18,7 +18,7 @@ WHERE ec.id = #{couresId}
 
 	<select id="getBaseCourseInfo" resultType="com.atguigu.eduservice.entity.frontvo.CourseWebVo">
 
-SELECT ec.title AS  title,ec.price AS price, ec.lesson_num AS lessonNum,ec.cover AS cover, ec.buy_count AS buyCount,
+SELECT ec.id , ec.title AS  title,ec.price AS price, ec.lesson_num AS lessonNum,ec.cover AS cover, ec.buy_count AS buyCount,
 			ec.view_count AS viewCount,ecd.description AS description , et.id AS teacherId,et.`name`	AS teacherName, et.career AS intro,
 			et.avatar AS avatar , es1.id AS subjectLevelOneId, es1.title AS subjectLevelOne, es2.id AS subjectLevelTwoId,es2.title AS  subjectLevelTwo
 
