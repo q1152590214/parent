@@ -14,6 +14,7 @@
     <modules>
         <module>common-utilt</module>
         <module>common-base</module>
+        <module>spring-security</module>
     </modules>
 
     <dependencies>

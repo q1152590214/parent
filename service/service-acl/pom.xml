@@ -11,15 +11,16 @@
 
     <artifactId>service-acl</artifactId>
     <dependencies>
-<!--        <dependency>-->
-<!--            <groupId>com.atguigu</groupId>-->
-<!--            <artifactId>spring_security</artifactId>-->
-<!--            <version>0.0.1-SNAPSHOT</version>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>com.bdqn</groupId>
+            <artifactId>spring-security</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
         </dependency>
+
     </dependencies>
 
 </project>
