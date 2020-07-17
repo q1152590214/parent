@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: service-statistics
+  cloud:
+    nacos:
+      config:
+        server-addr: localhost:8848
+        group: DEFAULT_GROUP
+        file-extension: yaml
+        namespace: c01ceea0-af8a-4eeb-b05a-da1eac694ba4
+        #多配置文件
+#        ext-config:
+#          - data-id: port.yaml
+#            refresh: true
+#              group: DEFAULT_GROUP
+  profiles:
+    active: test

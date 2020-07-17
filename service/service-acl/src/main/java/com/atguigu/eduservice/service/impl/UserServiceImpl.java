@@ -3,6 +3,7 @@ package com.atguigu.eduservice.service.impl;
 import com.atguigu.eduservice.entity.User;
 import com.atguigu.eduservice.mapper.UserMapper;
 import com.atguigu.eduservice.service.UserService;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -12,9 +13,13 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author testjava
- * @since 2020-07-15
+ * @since 2020-01-12
  */
 @Service
 public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
+    @Override
+    public User selectByUsername(String username) {
+        return baseMapper.selectOne(new QueryWrapper<User>().eq("username", username));
+    }
 }

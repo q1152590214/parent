@@ -1,5 +1,6 @@
 package com.atguigu.eduservice.mapper;
 
+
 import com.atguigu.eduservice.entity.Role;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 
@@ -9,7 +10,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * </p>
  *
  * @author testjava
- * @since 2020-07-15
+ * @since 2020-01-12
  */
 public interface RoleMapper extends BaseMapper<Role> {
 

@@ -1,16 +1,13 @@
 package com.atguigu.eduservice.controller;
 
 
-
 import com.atguigu.Result.Result;
 import com.atguigu.eduservice.entity.Permission;
 import com.atguigu.eduservice.service.PermissionService;
-import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.annotation.Resource;
 import java.util.List;
 
 /**
@@ -24,32 +21,55 @@ import java.util.List;
 @RestController
 @RequestMapping("/admin/acl/permission")
 @CrossOrigin
-@Api(description = "权限菜单模块")
 public class PermissionController {
 
-    @Resource
-    PermissionService permissionService;
+    @Autowired
+    private PermissionService permissionService;
 
-
-    @ApiOperation(value = "全部菜单")
+    //获取全部菜单
+    @ApiOperation(value = "查询所有菜单")
     @GetMapping
-    public Result getIndexAllPermission(){
-        List<Permission> permissionsList = permissionService.getIndexAllPermission();
-        return Result.OK().data("children",permissionsList);
+    public Result indexAllPermission() {
+        List<Permission> list =  permissionService.queryAllMenuGuli();
+        return Result.OK().data("children",list);
     }
 
-    @ApiOperation(value = "删除菜单")
+    @ApiOperation(value = "递归删除菜单")
     @DeleteMapping("remove/{id}")
-    public  Result remove(@PathVariable("id") String id){
-        permissionService.removeChildenById(id);
+    public Result remove(@PathVariable String id) {
+        permissionService.removeChildByIdGuli(id);
         return Result.OK();
     }
 
-    @ApiOperation("添加角色权限")
-    @PostMapping("doAssion")
-    public Result doAssion(String userID,String[] pisId){
-        permissionService.saveRolePermissionRealtionShip(userID,pisId);
+    @ApiOperation(value = "给角色分配权限")
+    @PostMapping("/doAssign")
+    public Result doAssign(String roleId,String[] permissionId) {
+        permissionService.saveRolePermissionRealtionShipGuli(roleId,permissionId);
         return Result.OK();
     }
+
+    @ApiOperation(value = "根据角色获取菜单")
+    @GetMapping("toAssign/{roleId}")
+    public Result toAssign(@PathVariable String roleId) {
+        List<Permission> list = permissionService.selectAllMenu(roleId);
+        return Result.OK().data("children", list);
+    }
+
+
+
+    @ApiOperation(value = "新增菜单")
+    @PostMapping("save")
+    public Result save(@RequestBody Permission permission) {
+        permissionService.save(permission);
+        return Result.OK();
+    }
+
+    @ApiOperation(value = "修改菜单")
+    @PutMapping("update")
+    public Result updateById(@RequestBody Permission permission) {
+        permissionService.updateById(permission);
+        return Result.OK();
+    }
+
 }
 

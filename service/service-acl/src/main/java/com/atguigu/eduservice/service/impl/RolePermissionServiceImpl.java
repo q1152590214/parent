@@ -1,5 +1,6 @@
 package com.atguigu.eduservice.service.impl;
 
+
 import com.atguigu.eduservice.entity.RolePermission;
 import com.atguigu.eduservice.mapper.RolePermissionMapper;
 import com.atguigu.eduservice.service.RolePermissionService;
@@ -12,7 +13,7 @@ import org.springframework.stereotype.Service;
  * </p>
  *
  * @author testjava
- * @since 2020-07-15
+ * @since 2020-01-12
  */
 @Service
 public class RolePermissionServiceImpl extends ServiceImpl<RolePermissionMapper, RolePermission> implements RolePermissionService {

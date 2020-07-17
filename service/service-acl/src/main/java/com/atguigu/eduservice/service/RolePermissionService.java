@@ -1,5 +1,6 @@
 package com.atguigu.eduservice.service;
 
+
 import com.atguigu.eduservice.entity.RolePermission;
 import com.baomidou.mybatisplus.extension.service.IService;
 
@@ -9,7 +10,7 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * </p>
  *
  * @author testjava
- * @since 2020-07-15
+ * @since 2020-01-12
  */
 public interface RolePermissionService extends IService<RolePermission> {
 
